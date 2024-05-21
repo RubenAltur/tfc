@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
+ 
 import 'package:flutter/material.dart';
-import 'package:llistes_compres/screens/producScreen.dart';
+import 'package:llistes_compres/screens/llistesScreen.dart';
+
 
 // ignore: must_be_immutable
 class mainScreen extends StatelessWidget {
@@ -54,7 +55,7 @@ class ClickableMercatCard extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: ((context) => producScreen(supermercat: mercat))));
+                  builder: ((context) => llisteScreen(supermercat: mercat))));
         }),
         child: mercatCard(mercat: mercat));
   }

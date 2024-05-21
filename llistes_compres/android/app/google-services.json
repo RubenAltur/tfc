@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1082900570996",
+    "project_id": "mercallistes",
+    "storage_bucket": "mercallistes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082900570996:android:6ce44f82365e06a91b8221",
+        "android_client_info": {
+          "package_name": "com.example.llistes_compres"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB31A2dtiEUUABIwo1vd1tOjttGWjyi0T0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
