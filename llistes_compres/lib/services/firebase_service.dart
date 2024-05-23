@@ -3,26 +3,25 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import 'dart:math';
 
-import 'package:llistes_compres/model/llista.dart';
-
-
-
 class fireservice{
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 
-Future<List<llista>> getLlistes() async {
+Future<List<Map<String, dynamic>>> getLlistes() async {
   try {
-    QuerySnapshot querySnapshot = await firestore.collection("llistes").get();
-     
-    
-    dynamic data=querySnapshot.docs.map((doc) {
+    CollectionReference collection = firestore.collection("llistes");
+    QuerySnapshot querySnapshot = await collection.get() as QuerySnapshot<Object?>;
+     print(querySnapshot);
+
+    List<Map<String, dynamic>> data;
+
+    data = querySnapshot.docs.map((doc) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-      return llista.fromMap(data);
+      return data;
     }).toList();
     print(data);
     return data;
-
+   
 
   } catch (e) {
     print("Error al obtener los documentos: $e");
