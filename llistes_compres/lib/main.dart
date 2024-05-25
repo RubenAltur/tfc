@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:llistes_compres/provider/llistaProvider.dart';
-import 'package:llistes_compres/provider/supermercatProvider.dart';
-import 'package:llistes_compres/screens/mainScreen.dart';
+import 'package:llistes_compres/screens/AuthScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Llista supermercats',
-        home: mainScreen(),
+        home: AuthScreen(),
       ),
     );
   }

@@ -1,7 +1,7 @@
 // ignore_for_file: empty_catches, non_constant_identifier_names
 
 import "package:cloud_firestore/cloud_firestore.dart";
-import 'dart:math';
+
 
 class fireservice{
 FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -31,17 +31,14 @@ Future<List<Map<String, dynamic>>> getLlistes() async {
 //firestore.collection("llistes");
  
 
-String generarRandomId(int length) {
-  const String chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-  final Random random = Random();
 
-  return List.generate(length, (index) => chars[random.nextInt(chars.length)]).join();
-}
 
-Future<void> addLlistes(Map<String, dynamic> llista)async{
+Future<void> addLlista(Map<String, dynamic> llista)async{
 
 try{
-await firestore.collection('llistes').doc(generarRandomId(9)).set(llista);
+
+await firestore.collection('llistes').add(llista);
+
 }catch (e) {
       
     }

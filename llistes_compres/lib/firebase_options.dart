@@ -66,4 +66,5 @@ class DefaultFirebaseOptions {
     projectId: 'mercallistes',
     storageBucket: 'mercallistes.appspot.com',
   );
+
 }

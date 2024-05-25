@@ -7,10 +7,21 @@ class Llista {
   List<dynamic> _items;
   String _nom;
   String _supermercat;
+  String _usuari;
 
   // Constructor principal
-  Llista(this._comprada, this._data, this._id, this._items, this._nom, this._supermercat);
+  Llista(this._comprada, this._data, this._id, this._items, this._nom, this._supermercat, this._usuari);
 
+  // Constructor vacío
+  Llista.empty()
+      : _comprada = false,
+        _data = '',
+        _id = 0,
+        _items = [],
+        _nom = '',
+        _supermercat = '',
+        _usuari='';
+  
   // Constructor named fromMap
   Llista.fromMap(Map<String, dynamic> map) :
     _comprada = map['comprada'],
@@ -18,7 +29,26 @@ class Llista {
     _id = map['id'],
     _items = map['items'],
     _nom = map['nom'],
-    _supermercat = map['supermercat'];
+    _supermercat = map['supermercat'],
+    _usuari =map['usuari'];
+
+   Map<String, dynamic> toMap() {
+    return {
+      'comprada': _comprada,
+      'data': _data,
+      'id': _id,
+      'items': _items,
+      'nom': _nom,
+      'supermercat': _supermercat,
+      'usuari': _usuari
+    };}
+
+  String get usuari => _usuari;
+  set usuari(String value) {
+    _usuari = value;
+  }
+
+
 
   // Getter and Setter for comprada
   bool get comprada => _comprada;
@@ -28,6 +58,7 @@ class Llista {
 
   // Getter and Setter for data
   String get data => _data;
+
   set data(String value) {
     _data = value;
   }

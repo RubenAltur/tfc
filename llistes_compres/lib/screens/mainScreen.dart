@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
  
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:llistes_compres/screens/llistesScreen.dart';
 
@@ -12,10 +13,22 @@ class mainScreen extends StatelessWidget {
     {"mercat": "carrefour"}
   ];
 
+  
   mainScreen({super.key});
+
+  final user = FirebaseAuth.instance.currentUser!;
+  void logOut(){
+    FirebaseAuth.instance.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold( 
+      appBar: AppBar(
+        title: Text('benvingut ${user.email}'),
+        actions: [ IconButton(onPressed: logOut, icon: Icon(Icons.logout))],
+      ),
+    
       body: Center(
         child: _creaLlistaMercats(llistamercats),
       ),
@@ -74,9 +87,20 @@ class mercatCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 67, 70, 72),
           ),
-          child: Align(
-            alignment: Alignment.center,
-            child: Text(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(16)),
+          child: Image.asset(
+            '/assets/img/$mercat.png',
+            height: 40,
+          )),
+              
+              Text(
               "Supermercat: $mercat",
               style: TextStyle(
                   fontFamily: "LeckerliOne",
@@ -89,7 +113,7 @@ class mercatCard extends StatelessWidget {
                         color: Colors.black,
                         blurRadius: 3),
                   ]),
-            ),
+            )],
           )),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:llistes_compres/model/llista.dart';
 
 import 'package:llistes_compres/services/firebase_service.dart';
 
@@ -27,7 +28,7 @@ class Llistaprovider with ChangeNotifier {
 
   void _carregaLlistesC(dynamic data) async{
     List<Map<String, dynamic>> jsonLlista= await fs.getLlistes();
-      print(jsonLlista);
+      
     _llistaEnv=jsonLlista;
     notifyListeners();
   }
@@ -39,6 +40,14 @@ class Llistaprovider with ChangeNotifier {
   List<Map<String, dynamic>>? get llistaEnv {
     return _llistaEnv;
   }
+
+  void addLlista(Llista llist){
+          Map<String, dynamic> llistaAPujar= llist.toMap();
+          print(llistaAPujar);
+          fs.addLlista(llistaAPujar);
+           notifyListeners();
+  }
+  
 
   set superMercatActuall(String? llista) {
     if (_llistaActual == null || _llistaActual != llista) {
