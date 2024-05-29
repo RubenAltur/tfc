@@ -3,20 +3,20 @@
 class Llista {
   bool _comprada;
   String _data;
-  int _id;
+  String _uid;
   List<dynamic> _items;
   String _nom;
   String _supermercat;
   String _usuari;
 
   // Constructor principal
-  Llista(this._comprada, this._data, this._id, this._items, this._nom, this._supermercat, this._usuari);
+  Llista(this._comprada, this._data, this._uid, this._items, this._nom, this._supermercat, this._usuari);
 
   // Constructor vacío
   Llista.empty()
       : _comprada = false,
         _data = '',
-        _id = 0,
+        _uid = '',
         _items = [],
         _nom = '',
         _supermercat = '',
@@ -26,7 +26,7 @@ class Llista {
   Llista.fromMap(Map<String, dynamic> map) :
     _comprada = map['comprada'],
     _data = map['data'],
-    _id = map['id'],
+    _uid = map['uid'],
     _items = map['items'],
     _nom = map['nom'],
     _supermercat = map['supermercat'],
@@ -36,7 +36,7 @@ class Llista {
     return {
       'comprada': _comprada,
       'data': _data,
-      'id': _id,
+      'id': _uid,
       'items': _items,
       'nom': _nom,
       'supermercat': _supermercat,
@@ -55,7 +55,7 @@ class Llista {
   set comprada(bool value) {
     _comprada = value;
   }
-
+ 
   // Getter and Setter for data
   String get data => _data;
 
@@ -64,9 +64,9 @@ class Llista {
   }
 
   // Getter and Setter for id
-  int get id => _id;
-  set id(int value) {
-    _id = value;
+  String get id => _uid;
+  set id(String value) {
+    _uid = value;
   }
 
   // Getter and Setter for items
@@ -86,6 +86,9 @@ class Llista {
   set supermercat(String value) {
     _supermercat = value;
   }
-
+ @override
+  String toString() {
+    return 'Llista(comprada: $_comprada, data: $_data, uid: $_uid, items: $_items, nom: $_nom, supermercat: $_supermercat, usuari: $_usuari)';
+  }
   
 }

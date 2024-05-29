@@ -248,8 +248,8 @@ class llisteScreen extends StatelessWidget {
                   // Aquí podrías añadir la lógica para agregar la lista y los productos al proveedor
                    llistaNova.nom = nomLL!;
                     llistaNova.items=products;
-                    int idR=generarRandomId(10);
-                    llistaNova.id=idR;
+                   
+                   
                     print(llistaNova.toString());
                     llistaProvi.addLlista(llistaNova);
                     

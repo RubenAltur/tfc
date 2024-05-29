@@ -20,7 +20,7 @@ class Llistaprovider with ChangeNotifier {
 
     List<Map<String, dynamic>>? jsonLlista= await fs.getLlistes();
     _llistaEnv=jsonLlista;
-  
+   print("fdfsdfsdfsd");
     notifyListeners();
   }
 
@@ -41,20 +41,17 @@ class Llistaprovider with ChangeNotifier {
 
   void addLlista(Llista llist){
           Map<String, dynamic> llistaAPujar= llist.toMap();
-          print(llistaAPujar);
+         // print(llistaAPujar);
           fs.addLlista(llistaAPujar);
           _carregaLlistes();
            notifyListeners();
   }
   
 
-  set superMercatActuall(String? llista) {
-    if (_llistaActual == null || _llistaActual != llista) {
-      _llistaEnv = null;
-      _llistaActual = llista;
-
-      _carregaLlistesC(llista);
-      notifyListeners();
-    }
+  void updateLlista( String Id, String camp, dynamic valorNou){
+        fs.updateCamp(   Id,  camp,  valorNou);
+         _carregaLlistes();
+           notifyListeners();
   }
+  
 }

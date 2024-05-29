@@ -29,4 +29,9 @@ class Item {
  static List<Item> fromList(List<dynamic> list) {
     return list.map((map) => Item.fromMap(map)).toList();
   }
+
+  @override
+  String toString() {
+    return 'Llista(comprada: $comprat, cantitat: $cantitat, nom: $nom)';
+  }
 }
