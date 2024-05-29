@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Llista supermercats',
+         theme: new ThemeData(scaffoldBackgroundColor: const Color.fromRGBO(219,226,239 ,100)),
         home: AuthScreen(),
       ),
     );

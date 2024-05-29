@@ -70,7 +70,7 @@ class Llista {
   }
 
   // Getter and Setter for items
-  List<dynamic> get items => _items;
+ List<dynamic> get items => _items;
   set items(List<dynamic> value) {
     _items = value;
   }

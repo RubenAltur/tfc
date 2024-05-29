@@ -1,9 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
- 
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:llistes_compres/screens/llistesScreen.dart';
-
 
 // ignore: must_be_immutable
 class mainScreen extends StatelessWidget {
@@ -13,22 +12,20 @@ class mainScreen extends StatelessWidget {
     {"mercat": "carrefour"}
   ];
 
-  
   mainScreen({super.key});
 
   final user = FirebaseAuth.instance.currentUser!;
-  void logOut(){
+  void logOut() {
     FirebaseAuth.instance.signOut();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold( 
+    return Scaffold(
       appBar: AppBar(
         title: Text('benvingut ${user.email}'),
-        actions: [ IconButton(onPressed: logOut, icon: Icon(Icons.logout))],
+        actions: [IconButton(onPressed: logOut, icon: Icon(Icons.logout))],
       ),
-    
       body: Center(
         child: _creaLlistaMercats(llistamercats),
       ),
@@ -91,29 +88,33 @@ class mercatCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-          padding: EdgeInsets.all(20),
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(16)),
-          child: Image.asset(
-            '/assets/img/$mercat.png',
-            height: 40,
-          )),
-              
-              Text(
-              "Supermercat: $mercat",
-              style: TextStyle(
-                  fontFamily: "LeckerliOne",
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontSize: 20,
-                  shadows: [
-                    Shadow(
-                        offset: Offset(2, 2),
-                        color: Colors.black,
-                        blurRadius: 3),
-                  ]),
-            )],
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(16)),
+                  child: Image.asset(
+                    'lib/assets/img/$mercat.png',
+                    height: 150,
+                  )),
+                 
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Text(
+                  "${mercat?.toUpperCase()}",
+                  style: TextStyle(
+                      fontFamily: "LeckerliOne",
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 20,
+                      shadows: [
+                        Shadow(
+                            offset: Offset(2, 2),
+                            color: Colors.black,
+                            blurRadius: 3),
+                      ]),
+                ),
+              )
+            ],
           )),
     );
   }

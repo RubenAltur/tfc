@@ -109,7 +109,7 @@ class _LoginscreenState extends State<Loginscreen> {
                 padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: [Text("Olvido su contraseña?")],
+                  children: [Text("Ha olvidat la seua contrasenya?")],
                 )),
             SizedBox(height: 25),
             //sign in

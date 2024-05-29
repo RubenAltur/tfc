@@ -1,27 +1,32 @@
-class item {
+class Item {
   bool comprat;
   String nom;
-  int cantitat;
+  String cantitat;
 
-  item({
+  Item({
     required this.comprat,
     required this.nom,
     required this.cantitat,
   });
 
-  factory item.fromMap(Map<String, dynamic> map) {
-    return item(
+  factory Item.fromMap(Map<String, dynamic> map) {
+    return Item(
       comprat: map['comprat'] ?? false,
       nom: map['nom'] ?? '',
-      cantitat: map['cantitat'] ?? 0,
+      cantitat: map['cantitat'] ?? '',
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMap() { 
     return {
       'comprat': comprat,
       'nom': nom,
       'cantitat': cantitat,
     };
+  }
+   
+
+ static List<Item> fromList(List<dynamic> list) {
+    return list.map((map) => Item.fromMap(map)).toList();
   }
 }

@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:llistes_compres/model/llista.dart';
 import 'package:llistes_compres/provider/llistaProvider.dart';
+import 'package:llistes_compres/screens/itemsScreen.dart';
 import 'package:provider/provider.dart';
 
 
@@ -30,7 +31,7 @@ class llisteScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Llistes de Compres'),
+        title: Text('Llistes de Compres de $supermercat'),
       ),
       body: Center(
         child: listasFiltradas.isEmpty
@@ -72,7 +73,7 @@ class llisteScreen extends StatelessWidget {
     return ListView.builder(
       itemCount: listasFiltradas.length,
       itemBuilder: (BuildContext context, int index) {
-        return llistaCard(llist: listasFiltradas[index]);
+        return ClickablLlistaCard(llist: listasFiltradas[index]);
       },
     );
   }
@@ -236,11 +237,12 @@ class llisteScreen extends StatelessWidget {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
                   
-                  List<Map<String, String>> products = [];
+                  List<Map<String, dynamic>> products = [];
                   for (int i = 0; i < _productControllers.length; i++) {
                     products.add({
-                      'producte': _productControllers[i].text,
-                      'quantitat': _quantityControllers[i].text,
+                      'comprat':false,
+                      'nom': _productControllers[i].text,
+                      'cantitat': _quantityControllers[i].text,
                     });
                   }
                   // Aquí podrías añadir la lógica para agregar la lista y los productos al proveedor
@@ -280,6 +282,27 @@ String obtenerFechaDeHoy() {
   DateTime ahora = DateTime.now();
   return "${ahora.day.toString().padLeft(2, '0')}/${ahora.month.toString().padLeft(2, '0')}/${ahora.year}";
 }
+
+
+class ClickablLlistaCard extends StatelessWidget {
+  ClickablLlistaCard({required this.llist, super.key});
+  final Llista llist;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+        onTap: (() {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: ((context) => itemsScreen(llista:llist ,))));
+        }),
+        child: llistaCard(llist: llist));
+  }
+}
+
+
+
+
 
 class llistaCard extends StatelessWidget {
   llistaCard({super.key, required this.llist});
