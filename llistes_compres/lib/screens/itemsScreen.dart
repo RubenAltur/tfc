@@ -53,6 +53,7 @@ class _itemsScreenState extends State<itemsScreen> {
     );
   }
 
+
   dynamic _creaLlistaItems(final List<Item> items) {
     return ListView.builder(
       itemCount: items.length,
@@ -65,7 +66,6 @@ class _itemsScreenState extends State<itemsScreen> {
     );
   }
 }
-
 class ClickableItemCard extends StatefulWidget {
   ClickableItemCard({required this.llist, super.key, required this.item});
   final Llista llist;
@@ -128,34 +128,50 @@ class ItemCard extends StatelessWidget {
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      item.nom,
-                      style: TextStyle(
-                        decoration:
-                            item.comprat ? TextDecoration.lineThrough : null,
-                      ),
+         
+          
+          
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      
+                      children: [
+                        Expanded(
+                          child: Text(
+                            item.nom,
+                            
+                            style: TextStyle(
+                              decoration:
+                                  item.comprat ? TextDecoration.lineThrough : null,
+                                  fontSize: 30,
+                                  backgroundColor:  item.comprat ? Colors.grey : null,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(item.cantitat ,
+                           style: TextStyle(
+                              decoration:
+                                  item.comprat ? TextDecoration.lineThrough : null,
+                                  fontSize: 30,
+                                  backgroundColor:  item.comprat ? Colors.grey : null,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  Expanded(
-                    child: Text(item.cantitat),
-                  ),
-                ],
+                    Divider(
+                      thickness: 0.5,
+                      color: Colors.grey,
+                    ),
+                  ],
+                ),
               ),
-              Divider(
-                thickness: 0.5,
-                color: Colors.grey,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
+       
+    
   }
 }

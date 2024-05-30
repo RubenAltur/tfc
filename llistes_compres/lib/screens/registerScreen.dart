@@ -31,11 +31,13 @@ class _RegisterscreenState extends State<Registerscreen> {
             email: usuariController.text, password: passController.text);
       } else {
         showError("Les contrasenyes no coincidixen");
+         Navigator.of(context).pop();
       }
     } on FirebaseAuthException catch (e) {
-      Navigator.pop(context);
+      
 
       showError(e.code);
+       Navigator.of(context).pop();
     }
   }
 

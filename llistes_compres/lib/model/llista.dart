@@ -24,13 +24,14 @@ class Llista {
   
   // Constructor named fromMap
   Llista.fromMap(Map<String, dynamic> map) :
-    _comprada = map['comprada'],
+    
     _data = map['data'],
     _uid = map['uid'],
     _items = map['items'],
     _nom = map['nom'],
     _supermercat = map['supermercat'],
-    _usuari =map['usuari'];
+    _usuari =map['usuari'],
+    _comprada = map['comprada'];
 
    Map<String, dynamic> toMap() {
     return {
@@ -91,4 +92,32 @@ class Llista {
     return 'Llista(comprada: $_comprada, data: $_data, uid: $_uid, items: $_items, nom: $_nom, supermercat: $_supermercat, usuari: $_usuari)';
   }
   
+  int productesComprats(){
+    int prod=0;
+      items.forEach((producte){
+          
+          if(!producte['comprat']) prod++;
+
+      });
+
+
+    return prod;
+
+  }
+
+  void llistaComprada(){
+   
+    int prod=0;
+    int llistaP=items.length;
+      items.forEach((producte){
+          
+          if(producte['comprat']) prod++;
+
+      });
+    if(prod==llistaP)comprada=true;
+
+    
+
+  }
+
 }

@@ -289,9 +289,11 @@ class ClickablLlistaCard extends StatelessWidget {
 class llistaCard extends StatelessWidget {
   llistaCard({super.key, required this.llist});
   final Llista llist;
+  
 
   @override
   Widget build(BuildContext context) {
+    llist.productesComprats;
     return Card(
       child: Container(
         height: 100,
@@ -301,18 +303,20 @@ class llistaCard extends StatelessWidget {
           border: Border.all(
             color: Colors.black,
           ),
-          color: const Color.fromARGB(255, 224, 106, 59),
+         
         ),
-        child: Row(
+        child: Column(
           children: [
             Expanded(
               flex: 1,
               child: Text(
                 llist.nom,
                 style: TextStyle(
+                  decoration: 
+                   llist.comprada ? TextDecoration.lineThrough : null,
                   fontFamily: "LeckerliOne",
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: llist.comprada ? Colors.black : Colors.white,
                   fontSize: 20,
                   shadows: [
                     Shadow(
@@ -346,7 +350,7 @@ class llistaCard extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Text(
-                "Productes restants: ${llist.items.length}",
+                "Productes restants: ${llist.productesComprats()}",
                 style: TextStyle(
                   fontFamily: "LeckerliOne",
                   fontWeight: FontWeight.bold,
