@@ -1,5 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-import 'dart:math';
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_const_constructors_in_immutables
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +6,6 @@ import 'package:llistes_compres/model/llista.dart';
 import 'package:llistes_compres/provider/llistaProvider.dart';
 import 'package:llistes_compres/screens/itemsScreen.dart';
 import 'package:provider/provider.dart';
-
-
-
 
 class llisteScreen extends StatelessWidget {
   llisteScreen({this.supermercat, Key? key}) : super(key: key);
@@ -23,11 +19,12 @@ class llisteScreen extends StatelessWidget {
     List<Map<String, dynamic>>? values = llistaProvi.llistaEnv;
 
     // Filtrar las listas que pertenecen al supermercado actual
-    List<Llista> listasFiltradas = values?.map((data) => Llista.fromMap(data))
-        .where((llist) => llist.supermercat == supermercat&& llist.usuari == user.email)
-        .toList() ?? [];
-
-       
+    List<Llista> listasFiltradas = values
+            ?.map((data) => Llista.fromMap(data))
+            .where((llist) =>
+                llist.supermercat == supermercat && llist.usuari == user.email)
+            .toList() ??
+        [];
 
     return Scaffold(
       appBar: AppBar(
@@ -59,7 +56,8 @@ class llisteScreen extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.add),
               onPressed: () {
-                _showAddItemDialog(context, llistaProvi.superMercatActual, llistaProvi);
+                _showAddItemDialog(
+                    context, llistaProvi.superMercatActual, llistaProvi);
               },
             ),
           ],
@@ -69,7 +67,6 @@ class llisteScreen extends StatelessWidget {
   }
 
   dynamic _creaLlistaProductes(List<Llista> listasFiltradas) {
-    
     return ListView.builder(
       itemCount: listasFiltradas.length,
       itemBuilder: (BuildContext context, int index) {
@@ -78,15 +75,16 @@ class llisteScreen extends StatelessWidget {
     );
   }
 
-  void _showAddItemDialog(BuildContext context, String? superMActual, Llistaprovider llistaProvi) {
+  void _showAddItemDialog(
+      BuildContext context, String? superMActual, Llistaprovider llistaProvi) {
     final _formKey = GlobalKey<FormState>();
-    
+
     Llista llistaNova = Llista.empty();
     String fecha = obtenerFechaDeHoy();
-    String? nomLL="";
+    String? nomLL = "";
     llistaNova.data = fecha;
     llistaNova.supermercat = superMActual!;
-    llistaNova.usuari=user.email!;
+    llistaNova.usuari = user.email!;
 
     List<TextEditingController> _productControllers = [];
     List<TextEditingController> _quantityControllers = [];
@@ -119,7 +117,7 @@ class llisteScreen extends StatelessWidget {
                       TextFormField(
                         decoration: InputDecoration(labelText: 'Nom'),
                         onSaved: (value) {
-                          nomLL=value;
+                          nomLL = value;
                         },
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -158,10 +156,12 @@ class llisteScreen extends StatelessWidget {
                                     icon: Icon(Icons.remove),
                                     onPressed: () {
                                       setState(() {
-                                        int currentValue = int.parse(_quantityControllers[index].text);
+                                        int currentValue = int.parse(
+                                            _quantityControllers[index].text);
                                         if (currentValue > 0) {
                                           currentValue--;
-                                          _quantityControllers[index].text = currentValue.toString();
+                                          _quantityControllers[index].text =
+                                              currentValue.toString();
                                         }
                                       });
                                     },
@@ -188,9 +188,11 @@ class llisteScreen extends StatelessWidget {
                                     icon: Icon(Icons.add),
                                     onPressed: () {
                                       setState(() {
-                                        int currentValue = int.parse(_quantityControllers[index].text);
+                                        int currentValue = int.parse(
+                                            _quantityControllers[index].text);
                                         currentValue++;
-                                        _quantityControllers[index].text = currentValue.toString();
+                                        _quantityControllers[index].text =
+                                            currentValue.toString();
                                       });
                                     },
                                   ),
@@ -211,7 +213,6 @@ class llisteScreen extends StatelessWidget {
                       SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: () {
-
                           setState(() {
                             _addProductField();
                           });
@@ -236,25 +237,22 @@ class llisteScreen extends StatelessWidget {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
-                  
+
                   List<Map<String, dynamic>> products = [];
                   for (int i = 0; i < _productControllers.length; i++) {
                     products.add({
-                      'comprat':false,
+                      'comprat': false,
                       'nom': _productControllers[i].text,
                       'cantitat': _quantityControllers[i].text,
                     });
                   }
                   // Aquí podrías añadir la lógica para agregar la lista y los productos al proveedor
-                   llistaNova.nom = nomLL!;
-                    llistaNova.items=products;
-                   
-                   
-                    print(llistaNova.toString());
-                    llistaProvi.addLlista(llistaNova);
-                    
+                  llistaNova.nom = nomLL!;
+                  llistaNova.items = products;
+
+                  llistaProvi.addLlista(llistaNova);
+
                   Navigator.of(context).pop();
-                  
                 }
               },
             ),
@@ -265,24 +263,10 @@ class llisteScreen extends StatelessWidget {
   }
 }
 
-int generarRandomId(int length) {
-   final Random random = Random();
-  String numero = '';
-
-  for (int i = 0; i < 9; i++) {
-    int digito = random.nextInt(9) + 1; // Genera un número aleatorio entre 1 y 9
-    numero += digito.toString();
-  }
-
-  return int.parse(numero);
-}
-
-
 String obtenerFechaDeHoy() {
   DateTime ahora = DateTime.now();
   return "${ahora.day.toString().padLeft(2, '0')}/${ahora.month.toString().padLeft(2, '0')}/${ahora.year}";
 }
-
 
 class ClickablLlistaCard extends StatelessWidget {
   ClickablLlistaCard({required this.llist, super.key});
@@ -294,15 +278,13 @@ class ClickablLlistaCard extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: ((context) => itemsScreen(llista:llist ,))));
+                  builder: ((context) => itemsScreen(
+                        llista: llist,
+                      ))));
         }),
         child: llistaCard(llist: llist));
   }
 }
-
-
-
-
 
 class llistaCard extends StatelessWidget {
   llistaCard({super.key, required this.llist});
@@ -318,7 +300,7 @@ class llistaCard extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(
             color: Colors.black,
-           ),
+          ),
           color: const Color.fromARGB(255, 224, 106, 59),
         ),
         child: Row(
@@ -342,8 +324,7 @@ class llistaCard extends StatelessWidget {
                 ),
               ),
             ),
-           
-           Expanded(
+            Expanded(
               flex: 1,
               child: Text(
                 "Data de la llista: ${llist.data}",
@@ -362,7 +343,6 @@ class llistaCard extends StatelessWidget {
                 ),
               ),
             ),
-          
             Expanded(
               flex: 1,
               child: Text(
