@@ -246,8 +246,7 @@ class llisteScreen extends StatelessWidget {
                       'cantitat': _quantityControllers[i].text,
                     });
                   }
-                  // Aquí podrías añadir la lógica para agregar la lista y los productos al proveedor
-                  llistaNova.nom = nomLL!;
+                   llistaNova.nom = nomLL!;
                   llistaNova.items = products;
 
                   llistaProvi.addLlista(llistaNova);
